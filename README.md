@@ -1,2 +1,5 @@
-# inf202bratlandwaalethunold
-Jonas Okkenhaug Bratland, Tobias Galteland Wåle, Oscar Wiersdalen Thunold
+# INF202 Project
+
+Authors:
+
+Jonas Okkenhaug Bratland, Tobias Galteland Wåle & Oscar Wiersdalen Thunold
