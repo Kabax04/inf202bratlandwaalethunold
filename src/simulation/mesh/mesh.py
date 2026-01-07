@@ -37,3 +37,7 @@ class Mesh:
 
                 self.cells.append(cell)
                 cell_id += 1
+
+    def computeNeighbors(self):
+        for cell in self.cells:
+            cell.compute_neighbors(self.cells)
