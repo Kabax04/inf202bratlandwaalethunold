@@ -1,4 +1,4 @@
-from .mesh import Mesh
+from .mesh.mesh import Mesh
 
 # TESTING THE MESH READER
 
