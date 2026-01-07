@@ -8,6 +8,12 @@ class Cell:
         self.point_ids = list(point_ids)
         self.neighbors = []
 
+    def compute_neighbors(self, cell_list):
+        for cell in cell_list:
+            matches = set(self.point_ids) & set(cell.point_ids)
+            if len(matches) == 2:
+                self.neighbors.append(cell.id)
+
     def __str__(self):
         return f"Cell {self.id}: points={self.point_ids}"
 
