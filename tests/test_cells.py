@@ -5,9 +5,9 @@ def test_cell_init_sets_fields():
     """
     Tests that the Cell constructor correctly initializes the id, point_ids, and neighbors attributes.
     """
-    c = Cell(cell_id=7, point_ids=(1, 2, 3))
+    c = Cell(idx=7, point_ids=(1, 2, 3))
 
-    assert c.id == 7
+    assert c.idx == 7
     assert c.point_ids == [1, 2, 3]   # konverteres til list
     assert c.neighbors == []          # starter tom
 
@@ -16,7 +16,7 @@ def test_cell_str():
     """
     Tests that the Cell __str__ method returns the expected string representation.
     """
-    c = Cell(cell_id=1, point_ids=[9, 8])
+    c = Cell(idx=1, point_ids=[9, 8])
     assert str(c) == "Cell 1: points=[9, 8]"
 
 
@@ -24,7 +24,7 @@ def test_line_str():
     """
     Tests that the Line __str__ method returns the expected string representation.
     """
-    line = Line(cell_id=2, point_ids=[0, 1])
+    line = Line(idx=2, point_ids=[0, 1])
     assert str(line) == "Line 2: points=[0, 1]"
 
 
