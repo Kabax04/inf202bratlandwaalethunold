@@ -37,8 +37,8 @@ def test_mesh_reads_cells(monkeypatch):  # monkeypatch used to mock meshio.read
     assert len(m.cells) == 2
     assert isinstance(m.cells[0], Line)
     assert isinstance(m.cells[1], Triangle)
-    assert m.cells[0].id == 0
-    assert m.cells[1].id == 1
+    assert m.cells[0].idx == 0
+    assert m.cells[1].idx == 1
 
 
 def test_mesh_raises_if_read_fails(monkeypatch):  # monkeypatch used to mock meshio.read
