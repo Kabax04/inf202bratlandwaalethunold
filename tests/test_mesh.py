@@ -1,3 +1,9 @@
+"""
+test_mesh.py
+
+Contains unit tests for the Mesh class in simulation.mesh.mesh.
+"""
+
 import numpy as np
 import pytest
 
@@ -37,8 +43,8 @@ def test_mesh_reads_cells(monkeypatch):  # monkeypatch used to mock meshio.read
     assert len(m.cells) == 2
     assert isinstance(m.cells[0], Line)
     assert isinstance(m.cells[1], Triangle)
-    assert m.cells[0].idx == 0
-    assert m.cells[1].idx == 1
+    assert m.cells[0].id == 0
+    assert m.cells[1].id == 1
 
 
 def test_mesh_raises_if_read_fails(monkeypatch):  # monkeypatch used to mock meshio.read
@@ -71,3 +77,26 @@ def test_computeNeighbors(monkeypatch):
 
     assert m.cells[0].neighbors == [1]
     assert m.cells[1].neighbors == [0]
+
+def test_mesh_ignores_unknown_cell_types(monkeypatch):
+    points = np.array([[0, 0, 0],
+                       [1, 0, 0],
+                       [0, 1, 0],
+                       [1, 1, 0]])
+
+    msh = FakeMsh(
+        points=points,
+        cells=[
+            Block("quad", np.array([[0, 1, 3, 2]])),      # ukjent type -> treffer else: continue
+            Block("triangle", np.array([[0, 1, 2]])),     # kjent type -> blir med
+        ],
+    )
+
+    monkeypatch.setattr("simulation.mesh.mesh.meshio.read", lambda _: msh)
+
+    m = Mesh("dummy.msh")
+
+    # quad skal ignoreres, bare triangle blir med
+    assert len(m.cells) == 1
+    assert isinstance(m.cells[0], Triangle)
+    assert m.cells[0].id == 0
