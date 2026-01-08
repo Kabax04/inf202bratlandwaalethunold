@@ -1,73 +1,93 @@
+"""
+test_cells.py
+
+Unit tests for the Line and Triangle classes in simulation.mesh.cells.
+"""
+
 import numpy as np
 import pytest
 
-from simulation.mesh.mesh import Mesh
 from simulation.mesh.cells import Line, Triangle
 
-
-class Block:  # fake class to mimic meshio Block
-    def __init__(self, t, data):
-        self.type = t
-        self.data = data
-
-
-class FakeMsh:  # fake class to mimic meshio Mesh
-    def __init__(self, points, cells):
-        self.points = points
-        self.cells = cells
-
-
-def test_mesh_reads_cells(monkeypatch):  # monkeypatch used to mock meshio.read
-    points = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0]])
-
-    msh = FakeMsh(
-        points=points,
-        cells=[
-            Block("vertex", np.array([[0]])),          # should be ignored
-            Block("line", np.array([[0, 1]])),         # cell id 0
-            Block("triangle", np.array([[0, 1, 2]])),  # cell id 1
-        ],
-    )
-
-    monkeypatch.setattr("simulation.mesh.mesh.meshio.read", lambda _: msh)
-
-    m = Mesh("dummy.msh")
-
-    assert np.all(m.points == points)
-    assert len(m.cells) == 2
-    assert isinstance(m.cells[0], Line)
-    assert isinstance(m.cells[1], Triangle)
-    assert m.cells[0].idx == 0
-    assert m.cells[1].idx == 1
+# Sample points array for use in tests
+POINTS = np.array([
+    [0.0, 0.0, 0.0],  # 0
+    [1.0, 0.0, 0.0],  # 1
+    [0.0, 1.0, 0.0],  # 2
+    [1.0, 1.0, 0.0],  # 3
+    [2.0, 0.0, 0.0],  # 4
+    [0.0, 2.0, 0.0],  # 5
+    [2.0, 2.0, 0.0],  # 6
+    [3.0, 3.0, 0.0],  # 7
+    [4.0, 4.0, 0.0],  # 8
+])
 
 
-def test_mesh_raises_if_read_fails(monkeypatch):  # monkeypatch used to mock meshio.read
-    def boom(_):
-        raise Exception("fail")
-
-    monkeypatch.setattr("simulation.mesh.mesh.meshio.read", boom)
-
-    with pytest.raises(RuntimeError):
-        Mesh("bad.msh")
+def test_line_str():
+    line = Line(idx=2, point_ids=[0, 1])
+    assert str(line) == "Line 2: points=[0, 1]"
 
 
-def test_computeNeighbors(monkeypatch):
-    points = np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0], [1, 1, 0]])
+def test_triangle_str():
+    triangle = Triangle(point_ids=[1, 2, 3], idx=3, points=POINTS)
+    assert str(triangle) == "Triangle 3: points=[1, 2, 3]"
 
-    msh = FakeMsh(
-        points=points,
-        cells=[
-            Block("triangle", np.array([
-                [0, 1, 2],  # id 0
-                [1, 2, 3],  # id 1 (neighbor to id 0   )
-            ])),
-        ],
-    )
 
-    monkeypatch.setattr("simulation.mesh.mesh.meshio.read", lambda _: msh)
+def test_triangle_midpoint_and_area():
+    # Rettvinklet trekant: (0,0), (1,0), (0,1)
+    points = np.array([
+        [0.0, 0.0, 0.0],  # 0
+        [1.0, 0.0, 0.0],  # 1
+        [0.0, 1.0, 0.0],  # 2
+    ])
 
-    m = Mesh("dummy.msh")
-    m.computeNeighbors()
+    t = Triangle(point_ids=[0, 1, 2], idx=0, points=points)
 
-    assert m.cells[0].neighbors == [1]
-    assert m.cells[1].neighbors == [0]
+    assert np.allclose(t.x_mid, [1/3, 1/3])
+    assert t.area == 0.5
+
+
+def test_triangle_asserts_three_points():
+    with pytest.raises(AssertionError):
+        Triangle(point_ids=[0, 1], idx=0, points=POINTS)
+
+
+def test_compute_neighbors_finds_one_neighbor_when_two_points_match():
+    t1 = Triangle(point_ids=[0, 1, 2], idx=0, points=POINTS)
+    t2 = Triangle(point_ids=[1, 2, 3], idx=1, points=POINTS)  # shares 1 and 2
+    t3 = Triangle(point_ids=[4, 5, 6], idx=2, points=POINTS)  # shares none
+
+    t1.compute_neighbors([t1, t2, t3])
+    assert t1.neighbors == [1]
+
+
+def test_compute_neighbors_adds_multiple_neighbors():
+    t1 = Triangle(point_ids=[0, 1, 2], idx=0, points=POINTS)
+    t2 = Triangle(point_ids=[1, 2, 3], idx=1, points=POINTS)  # shares 1 and 2
+    t3 = Triangle(point_ids=[0, 2, 4], idx=2, points=POINTS)  # shares 0 and 2
+
+    t1.compute_neighbors([t1, t2, t3])
+    assert set(t1.neighbors) == {1, 2}
+
+
+def test_compute_neighbors_does_not_add_neighbor_if_only_one_point_matches():
+    t1 = Triangle(point_ids=[0, 1, 2], idx=0, points=POINTS)
+    t2 = Triangle(point_ids=[2, 7, 8], idx=1, points=POINTS)  # shares only point 2
+
+    t1.compute_neighbors([t2])
+    assert t1.neighbors == []
+
+
+def test_compute_neighbors_does_not_add_neighbor_if_three_points_match():
+    t1 = Triangle(point_ids=[0, 1, 2], idx=0, points=POINTS)
+    t2 = Triangle(point_ids=[0, 1, 2], idx=1, points=POINTS)  # shares all 3
+
+    t1.compute_neighbors([t2])
+    assert t1.neighbors == []
+
+
+def test_compute_neighbors_does_not_add_self_as_neighbor():
+    t1 = Triangle(point_ids=[0, 1, 2], idx=0, points=POINTS)
+
+    t1.compute_neighbors([t1])
+    assert t1.neighbors == []

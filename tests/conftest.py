@@ -1,3 +1,8 @@
+"""
+conftest.py
+
+Pytest configuration file for setting up the test environment.
+"""
 import sys
 from pathlib import Path
 
