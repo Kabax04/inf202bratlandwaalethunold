@@ -6,6 +6,8 @@ Contains unit tests for the Cell, Line, and Triangle classes in simulation.mesh.
 
 from simulation.mesh.cells import Cell, Line, Triangle
 
+# TESTS FOR CELL INITIALIZATION
+
 
 def test_cell_init_sets_fields():
     """
@@ -16,6 +18,8 @@ def test_cell_init_sets_fields():
     assert c.idx == 7
     assert c.point_ids == [1, 2, 3]   # converts to list
     assert c.neighbors == []          # starts empty
+
+# TESTS FOR __str__ METHODS
 
 
 def test_cell_str():
@@ -40,6 +44,8 @@ def test_triangle_str():
     """
     triangle = Triangle(idx=3, point_ids=[1, 2, 3])
     assert str(triangle) == "Triangle 3: points=[1, 2, 3]"
+
+# TESTS FOR NEIGHBOR COMPUTATION IN TRIANGLE CLASS
 
 
 def test_compute_neighbors_finds_one_neighbor_when_two_points_match():
