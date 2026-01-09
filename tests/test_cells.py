@@ -13,7 +13,7 @@ def test_cell_init_sets_fields():
     """
     c = Cell(idx=7, point_ids=(1, 2, 3))
 
-    assert c.id == 7
+    assert c.idx == 7
     assert c.point_ids == [1, 2, 3]   # converts to list
     assert c.neighbors == []          # starts empty
 
