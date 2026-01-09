@@ -14,6 +14,11 @@ Read mesh and compute neighbors, starting on tests for cells.py and mesh.py.
 Preparing triangle geometry with area and midpoint, finishing tests on mesh and cells. Add file for logging.
 
 - 9.1
+Update README.md to be more descriptive, adding structure documentation and keeping it updated continuously.
+Adding edge vectors and normal vectors to triangle class.
+Writing tests for updated triangle class.
+Implement flux.
+Test flux.
 
 ### Week Two
 - 12.1
