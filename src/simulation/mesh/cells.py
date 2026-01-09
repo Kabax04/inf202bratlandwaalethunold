@@ -1,8 +1,7 @@
-from abc import ABC, abstractmethod
 import numpy as np
 
 
-class Cell(ABC):
+class Cell():
     """
     Base class for mesh cells.
     Abstract because different cell types have different properties.
