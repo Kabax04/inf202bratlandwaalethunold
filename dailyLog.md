@@ -22,6 +22,11 @@ Implement flux.
 ### Week Two
 - 12.1
 Test flux functions from last week.
+Create simulation.py with basic structure for running simulations.
+Start implementing time stepping methods.
+Write tests for time stepping methods.
+Add set initial state in simulation class.
+Add fishing grounds in simulation class.
 
 - 13.1
 - 14.1

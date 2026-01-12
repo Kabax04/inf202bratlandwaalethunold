@@ -106,6 +106,37 @@ Represents a 2D triangle cell, inheriting from `Cell`. Computes geometric proper
 - `__str__()`: Returns a string representation of the triangle cell.
 
 ---
+
+#### Simulation
+
+The `Simulation` class manages the time evolution of the oil spill over the mesh using a finite volume method.
+
+**Key attributes:**
+- `mesh`: The mesh object containing cells and geometry.
+- `dt`: Time step size.
+- `u`: NumPy array holding the current solution (oil amount per cell).
+- `u_new`: NumPy array for temporary storage of the updated solution.
+
+**Key methods:**
+- `__init__(mesh, dt)`: Initializes the simulation with a mesh and time step.
+- `step()`: Advances the solution by one time step, updating cell values using fluxes between neighbors.
+- `run(n_steps)`: Runs the simulation for a specified number of time steps.
+- `set_initial_state(x_start, sigma2)`: Sets the initial oil distribution, typically as a Gaussian centered at `x_start`.
+
+The class enforces boundary conditions by setting line cell values to zero after each step.
+
+---
+
+#### flux.py
+
+Provides functions to compute numerical fluxes between mesh cells for the finite volume method.
+
+**Key functions:**
+- `flux(a, b, normal, edge_velocity)`: Computes the upwind flux across an edge based on the direction of the velocity and the values on either side.
+- `flux_contribution(u_i, u_ngh, area_i, normal_i_l, edge_velocity_i, edge_velocity_ngh, dt)`: Calculates the contribution of the flux between a cell and its neighbor, averaged over their velocities and scaled by time step and cell area.
+
+---
+
 ***Bratland, Wåle, Thunold***
 
 ***NMBU, 2026***
