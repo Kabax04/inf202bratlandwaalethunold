@@ -88,3 +88,18 @@ class Simulation:
                 self.u[cell.idx] = np.exp(-np.dot(dx, dx) / sigma2)
             else:
                 self.u[cell.idx] = 0.0
+
+    def find_fishing_ground_cells(self):
+
+        self.fishing_cells = []
+
+        for cell in self.mesh.cells:
+            if not isinstance(cell, Triangle):
+                continue
+
+        x, y = cell.midpoint
+        if 0.0 <= x <= 0.45 and 0.0 <= y <= 0.2:
+            self.fishing_cells.append(cell.idx)
+
+    def oil_in_fishing_ground(self):
+        return np.sum(self.u[self.fishing_cells])
