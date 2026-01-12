@@ -45,7 +45,6 @@ class Triangle(Cell):
 
     def __init__(self, point_ids, idx, points=None):  # points is an array of point coordinates
         super().__init__(idx, point_ids)
-        self._points = points
         if len(point_ids) != 3:  # ensure triangle has 3 points
             raise ValueError("Triangle must have exactly 3 point IDs")
 
@@ -57,11 +56,14 @@ class Triangle(Cell):
             self._normals = None
             return
 
+        self._points = points[:, :2]  # use only x,y
+
         self._x_mid = self._compute_midpoint()
         self._area = self._compute_area()
         self._edge_points = self._compute_edge_points()
         self._edge_vector = self._compute_edge_vector()
         self._normals = self._compute_normals()
+        self._velocity = self._velocity_field()
 
     def _compute_midpoint(self):  # computes centroid of triangle
         p = self._points[self.point_ids]
@@ -83,7 +85,7 @@ class Triangle(Cell):
             (p3, p1)
         ]
 
-    def _compute_edge_vector(self):  # Remove later if unused
+    def _compute_edge_vector(self):  # REMOVE LATER IF UNUSED !!!!!!!!!!!!!!!!!!!!!!!!
         return [pj - pi for pi, pj in self._edge_points]
 
     def _compute_normals(self):
@@ -106,6 +108,14 @@ class Triangle(Cell):
             normals.append(normal*edge_length)
 
         return normals
+
+    def _velocity_field(self):
+        """
+        Prescribed ocean velocity field.
+        Evaluated at cell centroid.
+        """
+        x, y = self._x_mid
+        return np.array([1.0 - y, 0.0])
 
     @property  # getter for midpoint
     def x_mid(self):
