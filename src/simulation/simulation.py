@@ -1,5 +1,5 @@
 import numpy as np
-from physics.flux import flux
+from physics.flux import flux_contribution
 from mesh.cells import Triangle
 
 
@@ -29,34 +29,29 @@ class Simulation:
 
             i = cell.idx
             Ai = cell.area
-
-            if Ai <= 0:
-                continue
-
             ui = self.u[i]
 
             update = 0.0
 
             for k, ngh_idx in enumerate(cell.neighbors):
                 ngh = self.mesh.cells[ngh_idx]  # neighbor cell
+                normal = cell.normals[k]  # scaled normal vector
 
-                if not isinstance(ngh, Triangle):
-                    continue
+                if isinstance(ngh, Triangle):
+                    u_ngh = self.u[ngh_idx]
+                    v_ngh = ngh.velocity
+                else:
+                    u_ngh = 0.0
+                    v_ngh = np.zeros_like(cell.velocity)
 
-                # solution within neighbor cell
-                u_ngh = self.u[ngh_idx]
-
-                # scaled normal vector
-                normal = cell.normals[k]
-
-                # velocity
-                v = 0.5 * (cell.velocity + ngh.velocity)
-
-                update -= (self.dt / Ai) * flux(
+                update += flux_contribution(
                     ui,
                     u_ngh,
+                    Ai,
                     normal,
-                    v
+                    cell.velocity,
+                    v_ngh,
+                    self.dt
                 )
 
             self.u_new[i] = ui + update
@@ -70,3 +65,12 @@ class Simulation:
         '''
         for _ in range(n_steps):
             self.step()
+
+    def set_initial_state(self, x_start=np.array([0.35, 0.45]), sigma2=0.01):
+        for cell in self.mesh.cells:
+            if isinstance(cell, Triangle):
+                x = cell.midpoint,
+                dx = x - x_start
+                self.u[cell.idx] = np.exp(-np.dot(dx, dx) / sigma2)
+            else:
+                self.u[cell.idx] = 0.0
