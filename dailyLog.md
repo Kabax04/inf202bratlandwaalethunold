@@ -18,10 +18,11 @@ Update README.md to be more descriptive, adding structure documentation and keep
 Adding edge vectors and normal vectors to triangle class.
 Writing tests for updated triangle class.
 Implement flux.
-Test flux.
 
 ### Week Two
 - 12.1
+Test flux functions from last week.
+
 - 13.1
 - 14.1
 - 15.1

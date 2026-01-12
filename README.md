@@ -36,7 +36,11 @@ pip install -r requirements.txt
 
 ***WIP: Config file yet implemented.***
 
-***Features are so far testable with included test files.***
+***Features are so far testable with included test files:***
+
+```bash
+pytest -q
+```
 
 ## File structure documentation
 
