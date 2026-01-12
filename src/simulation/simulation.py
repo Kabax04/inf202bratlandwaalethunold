@@ -1,6 +1,6 @@
 import numpy as np
-from physics.flux import flux_contribution
-from mesh.cells import Triangle
+from .physics.flux import flux_contribution
+from .mesh.cells import Triangle, Line
 
 
 class Simulation:
@@ -29,6 +29,10 @@ class Simulation:
 
             i = cell.idx
             Ai = cell.area
+
+            if Ai <= 0:
+                continue
+
             ui = self.u[i]
 
             update = 0.0
@@ -54,7 +58,17 @@ class Simulation:
                     self.dt
                 )
 
+            # if no triangle neighbors contributed, skip update
+            if update == 0.0:
+                self.u_new[i] = ui
+                continue
+
             self.u_new[i] = ui + update
+
+        # enforce boundary condition: line cells are always zero
+        for cell in self.mesh.cells:
+            if isinstance(cell, Line):
+                self.u_new[cell.idx] = 0.0
 
         # swap
         self.u, self.u_new = self.u_new, self.u
