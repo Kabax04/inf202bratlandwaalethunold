@@ -1,0 +1,3 @@
+meshFile = "bay.msh"
+dt = 0.01
+tEnd = 0.5
