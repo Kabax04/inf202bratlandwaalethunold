@@ -12,14 +12,37 @@ class Cell():
         self.point_ids = list(point_ids)
         self.neighbors = []
 
-    def compute_neighbors(self, cell_list):  # finds neighboring cells sharing 2 points
+    def compute_neighbors(self, cell_list):
         self.neighbors = []
+
+        is_triangle = hasattr(self, "edge_to_neighbor")
+
+        if is_triangle:
+            self.edge_to_neighbor = [None, None, None]
+
         for cell in cell_list:
             if cell is self:
                 continue
-            matches = set(self.point_ids) & set(cell.point_ids)
-            if len(matches) == 2:
-                self.neighbors.append(cell.idx)
+
+            shared = set(self.point_ids) & set(cell.point_ids)
+            if len(shared) != 2:
+                continue
+
+            self.neighbors.append(cell.idx)
+
+            if not is_triangle or not hasattr(cell, "edge_to_neighbor"):
+                continue
+
+            shared = set(shared)
+
+            for k in range(3):
+                edge_ids = {
+                    self.point_ids[k],
+                    self.point_ids[(k + 1) % 3]
+                }
+                if edge_ids == shared:
+                    self.edge_to_neighbor[k] = cell.idx
+                    break
 
     def __str__(self):
         return f"Cell {self.idx}: points={self.point_ids}"
@@ -68,6 +91,8 @@ class Triangle(Cell):
         self._edge_vector = self._compute_edge_vector()
         self._normals = self._compute_normals()
         self._velocity = self._velocity_field()
+
+        self.edge_to_neighbor = [None, None, None]
 
     def _compute_midpoint(self):  # computes centroid of triangle
         p = self._points
@@ -119,7 +144,7 @@ class Triangle(Cell):
         Evaluated at cell centroid.
         """
         x, y = self._x_mid
-        return np.array([1.0 - y, 0.0])
+        return np.array([y-0.2*x, -x])
 
     @property  # getter for midpoint
     def x_mid(self):
