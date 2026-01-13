@@ -3,6 +3,7 @@ import argparse
 from .config import Config
 from .simulation.mesh.mesh import Mesh
 from .simulation.simulation import Simulation
+from .plotting import plot_solution
 
 
 def main():
@@ -27,6 +28,8 @@ def main():
     # create and run simulation
     sim = Simulation(mesh, config.dt)
     sim.run(config.t_end)
+
+    plot_solution(mesh, sim.u, "final.png")
 
 
 if __name__ == "__main__":

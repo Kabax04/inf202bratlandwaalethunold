@@ -21,7 +21,7 @@ class Simulation:
         '''
         Advance the solution by one time step using finite volume method.
         '''
-        self.u_new[:] = self.u  # start with copy
+        self.u_new[:] = self.u[:]  # start with current solution
 
         for cell in self.mesh.cells:
             if not isinstance(cell, Triangle):
@@ -38,6 +38,10 @@ class Simulation:
             update = 0.0
 
             for k, ngh_idx in enumerate(cell.neighbors):
+                ngh_idx = cell.edge_to_neighbor[k]
+                if ngh_idx is None:
+                    continue
+
                 ngh = self.mesh.cells[ngh_idx]  # neighbor cell
                 normal = cell.normals[k]  # scaled normal vector
 
@@ -58,11 +62,6 @@ class Simulation:
                     self.dt
                 )
 
-            # if no triangle neighbors contributed, skip update
-            if update == 0.0:
-                self.u_new[i] = ui
-                continue
-
             self.u_new[i] = ui + update
 
         # enforce boundary condition: line cells are always zero
@@ -77,6 +76,8 @@ class Simulation:
         '''
         Run the simulation for a given number of time steps.
         '''
+        self.set_initial_state()
+
         n_steps = int(t_end / self.dt)
         for _ in range(n_steps):
             self.step()
