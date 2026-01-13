@@ -1,4 +1,6 @@
 import argparse
+import subprocess
+import sys
 
 from .config import Config
 from .simulation.mesh.mesh import Mesh
@@ -27,9 +29,10 @@ def main():
 
     # create and run simulation
     sim = Simulation(mesh, config.dt)
-    sim.run(config.t_end)
+    sim.run(config.t_end, 2)
 
     plot_solution(mesh, sim.u, "final.png")
+    subprocess.run([sys.executable, "src/video.py"])
 
 
 if __name__ == "__main__":

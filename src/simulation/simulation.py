@@ -1,6 +1,7 @@
 import numpy as np
 from .physics.flux import flux_contribution
 from .mesh.cells import Triangle, Line
+from src.plotting import plot_solution
 
 
 class Simulation:
@@ -72,15 +73,22 @@ class Simulation:
         # swap
         self.u, self.u_new = self.u_new, self.u
 
-    def run(self, t_end):
+    def run(self, t_end, writeFrequency=1):
         '''
         Run the simulation for a given number of time steps.
         '''
         self.set_initial_state()
 
         n_steps = int(t_end / self.dt)
-        for _ in range(n_steps):
+        for step in range(n_steps):
             self.step()
+
+            if step % writeFrequency == 0:
+                plot_solution(
+                    self.mesh,
+                    self.u,
+                    f"tmp/img_{step:04d}.png"
+                )
 
     def set_initial_state(self, x_start=np.array([0.35, 0.45]), sigma2=0.01):
         for cell in self.mesh.cells:
