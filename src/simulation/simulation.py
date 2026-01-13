@@ -83,7 +83,7 @@ class Simulation:
     def set_initial_state(self, x_start=np.array([0.35, 0.45]), sigma2=0.01):
         for cell in self.mesh.cells:
             if isinstance(cell, Triangle):
-                x = cell.midpoint,
+                x = cell.midpoint
                 dx = x - x_start
                 self.u[cell.idx] = np.exp(-np.dot(dx, dx) / sigma2)
             else:
@@ -97,9 +97,9 @@ class Simulation:
             if not isinstance(cell, Triangle):
                 continue
 
-        x, y = cell.midpoint
-        if 0.0 <= x <= 0.45 and 0.0 <= y <= 0.2:
-            self.fishing_cells.append(cell.idx)
+            x, y = cell.midpoint
+            if 0.0 <= x <= 0.45 and 0.0 <= y <= 0.2:
+                self.fishing_cells.append(cell.idx)
 
     def oil_in_fishing_ground(self):
-        return np.sum(self.u[self.fishing_cells])
+        return sum(self.u[i] * self.mesh.cells[i].area for i in self.fishing_cells)
