@@ -91,10 +91,18 @@ def test_normals_orthogonal_to_edges(simple_triangle):
 
 def test_triangle_without_points():
     tri = Triangle(point_ids=[0, 1, 2], idx=0, points=None)
-    assert tri.x_mid is None
-    assert tri.area is None
-    assert tri.edge_points is None
-    assert tri.normals is None
+
+    with pytest.raises(RuntimeError):
+        _ = tri.x_mid
+
+    with pytest.raises(RuntimeError):
+        _ = tri.area
+
+    with pytest.raises(RuntimeError):
+        _ = tri.edge_points
+
+    with pytest.raises(RuntimeError):
+        _ = tri.normals
 
 
 def test_triangle_wrong_number_of_points():

@@ -48,15 +48,19 @@ class Triangle(Cell):
         if len(point_ids) != 3:  # ensure triangle has 3 points
             raise ValueError("Triangle must have exactly 3 point IDs")
 
+        # --- TOPOLOGY ONLY MODE ---
         if points is None:
+            self._points = None
             self._x_mid = None
             self._area = None
             self._edge_points = None
             self._edge_vector = None
             self._normals = None
+            self._velocity = None
             return
 
-        self._points = points[:, :2]  # use only x,y
+        # --- GEOMETRY MODE ---
+        self._points = points[self.point_ids, :2]  # shape (3, 2)
 
         self._x_mid = self._compute_midpoint()
         self._area = self._compute_area()
@@ -66,18 +70,18 @@ class Triangle(Cell):
         self._velocity = self._velocity_field()
 
     def _compute_midpoint(self):  # computes centroid of triangle
-        p = self._points[self.point_ids]
+        p = self._points
         return np.mean(p[:, :2], axis=0)
 
     def _compute_area(self):  # computes area using determinant method
-        p = self._points[self.point_ids]
+        p = self._points
         x1, y1 = p[0][:2]
         x2, y2 = p[1][:2]
         x3, y3 = p[2][:2]
         return abs((x1*(y2 - y3) + x2*(y3 - y1) + x3*(y1 - y2)) / 2)
 
     def _compute_edge_points(self):
-        p = self._points[self.point_ids][:, :2]
+        p = self._points[:, :2]
         p1, p2, p3 = p
         return [
             (p1, p2),
@@ -119,20 +123,42 @@ class Triangle(Cell):
 
     @property  # getter for midpoint
     def x_mid(self):
+        if self._x_mid is None:
+            raise RuntimeError("Triangle has no geometry (points=None)")
         return self._x_mid
 
     @property  # getter for area
     def area(self):
+        if self._area is None:
+            raise RuntimeError("Triangle has no geometry (points=None)")
         return self._area
 
-    @property  # getter for edgePoints
+    @property  # getter for edge_points
     def edge_points(self):
+        if self._edge_points is None:
+            raise RuntimeError("Triangle has no geometry (points=None)")
         return self._edge_points
 
-    @property  # getter for edgevector
+    @property  # getter for edge_vector
     def edge_vector(self):
+        if self._edge_vector is None:
+            raise RuntimeError("Triangle has no geometry (points=None)")
         return self._edge_vector
 
     @property  # getter for normals
     def normals(self):
+        if self._normals is None:
+            raise RuntimeError("Triangle has no geometry (points=None)")
         return self._normals
+
+    @property  # getter for midpoint
+    def midpoint(self):
+        if self._x_mid is None:
+            raise RuntimeError("Triangle has no geometry (points=None)")
+        return self._x_mid
+
+    @property  # getter for velocity
+    def velocity(self):
+        if self._velocity is None:
+            raise RuntimeError("Triangle has no geometry (points=None)")
+        return self._velocity

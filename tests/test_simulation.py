@@ -103,3 +103,77 @@ def test_flux_direction_reduces_upstream_cell(simple_mesh):
     sim.step()
 
     assert sim.u[i] < 1.0
+
+
+# TEST TO ENSURE INITIAL STATE IS POSITIVE AND PEAKED AT GIVEN POINT
+
+def test_initial_state_positive_and_peaked(simple_mesh):
+    '''
+    u >= 0 everywhere
+    maximum at point x* = (0.35, 0.45)
+    Line cells allways have u == 0
+    '''
+    sim = Simulation(simple_mesh, dt=0.01)
+    sim.set_initial_state()
+
+    u = sim.u
+
+    # 1. No negative values
+    assert (u >= 0).all()
+
+    # 2. Find triangle closest to x*
+    x_star = np.array([0.35, 0.45])
+    distances = []
+
+    for cell in simple_mesh.cells:
+        if isinstance(cell, Triangle):
+            distances.append(
+                np.linalg.norm(cell.midpoint - x_star)
+            )
+        else:
+            distances.append(np.inf)
+
+    i_min = np.argmin(distances)
+    assert u[i_min] == pytest.approx(u.max())
+
+
+# TEST TO ENSURE NO OIL IN FISHING GROUND WHEN INITIAL STATE IS ZERO
+
+def test_empty_fishing_ground(simple_mesh):
+    sim = Simulation(simple_mesh, dt=0.01)
+    sim.u[:] = 1.0  # puts oil everywhere
+
+    sim.find_fishing_ground_cells()
+
+    if len(sim.fishing_cells) == 0:
+        assert sim.oil_in_fishing_ground() == 0.0
+
+
+# AREA-WEIGHTED SUM
+
+def test_fishing_ground_area_weighted(simple_mesh):
+    sim = Simulation(simple_mesh, dt=0.01)
+    sim.find_fishing_ground_cells()
+
+    # sett u = 1 på alle triangle-celler
+    for cell in simple_mesh.cells:
+        if isinstance(cell, Triangle):
+            sim.u[cell.idx] = 1.0
+
+    expected = sum(
+        simple_mesh.cells[i].area
+        for i in sim.fishing_cells
+    )
+
+    assert sim.oil_in_fishing_ground() == pytest.approx(expected)
+
+
+# STABILITY TEST: NO NAN OR INF
+
+def test_simulation_stability(simple_mesh):
+    sim = Simulation(simple_mesh, dt=0.001)
+    sim.set_initial_state()
+
+    sim.run(50)
+
+    assert np.isfinite(sim.u).all()
