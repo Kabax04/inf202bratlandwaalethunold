@@ -73,10 +73,11 @@ class Simulation:
         # swap
         self.u, self.u_new = self.u_new, self.u
 
-    def run(self, n_steps):
+    def run(self, t_end):
         '''
         Run the simulation for a given number of time steps.
         '''
+        n_steps = int(t_end / self.dt)
         for _ in range(n_steps):
             self.step()
 
