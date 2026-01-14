@@ -1,8 +1,8 @@
-from simulation.simulation import Simulation
-from simulation.mesh.cells import Line, Triangle
+from src.simulation.simulation import Simulation
+from src.simulation.mesh.cells import Line, Triangle
 import numpy as np
 import pytest
-from simulation.mesh.mesh import Mesh
+from src.simulation.mesh.mesh import Mesh
 
 
 @pytest.fixture
@@ -174,6 +174,6 @@ def test_simulation_stability(simple_mesh):
     sim = Simulation(simple_mesh, dt=0.001)
     sim.set_initial_state()
 
-    sim.run(50)
+    sim.run(50, writeFrequency=None)  # disable plotting for test to save time
 
     assert np.isfinite(sim.u).all()

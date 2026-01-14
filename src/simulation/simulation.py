@@ -1,7 +1,8 @@
+from pathlib import Path
 import numpy as np
 from .physics.flux import flux_contribution
 from .mesh.cells import Triangle, Line
-from src.plotting import plot_solution
+from ..plotting import plot_solution
 
 
 class Simulation:
@@ -79,11 +80,15 @@ class Simulation:
         '''
         self.set_initial_state()
 
+        do_plot = (writeFrequency is not None) and (writeFrequency > 0)
+        if do_plot:
+            Path("tmp").mkdir(parents=True, exist_ok=True)  # make sure tmp/ exists
+
         n_steps = int(t_end / self.dt)
         for step in range(n_steps):
             self.step()
 
-            if step % writeFrequency == 0:
+            if do_plot and (step % writeFrequency == 0):
                 plot_solution(
                     self.mesh,
                     self.u,

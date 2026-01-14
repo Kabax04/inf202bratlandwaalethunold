@@ -176,3 +176,13 @@ class Triangle(Cell):
         if self._velocity is None:
             raise RuntimeError("Triangle has no geometry (points=None)")
         return self._velocity
+
+    @property
+    def edge_vector(self):
+        """
+        Edge vectors for the 3 triangle edges, in the same ordering as edge_points:
+        [(p2-p1), (p3-p2), (p1-p3)].
+        Computed on-the-fly to avoid storing redundant state.
+        """
+        # Reuse existing validation in edge_points (will raise if geometry missing)
+        return [pj - pi for pi, pj in self.edge_points]

@@ -29,7 +29,17 @@ Add set initial state in simulation class.
 Add fishing grounds in simulation class.
 
 - 13.1
+Test initial state setting and fishing grounds.
+Implement config file.
+Create visualization script.
+Run initial simulations and visualize results.
+
 - 14.1
+Fix small bugs and temporary code.
+Improve documentation in README.md and code comments.
+Write docstrings for all classes and functions.
+Add some features to video visualization script.
+
 - 15.1
 - 16.1
 
