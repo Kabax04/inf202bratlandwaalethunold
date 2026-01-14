@@ -10,7 +10,7 @@ height, width, layers = frame.shape
 
 # Define video writer
 fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-video = cv2.VideoWriter(output_video, fourcc, 10, (width, height))
+video = cv2.VideoWriter(output_video, fourcc, 15, (width, height))
 
 for i in range(n_frames):
     img = cv2.imread(img_template.format(i))

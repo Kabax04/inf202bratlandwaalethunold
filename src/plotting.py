@@ -53,6 +53,15 @@ def plot_solution(mesh, u, filename, umin=None, umax=None):
 
         ax.add_patch(plt.Polygon(pts, color=color))
 
+    # Mark the fishing grounds
+    fishing_rect = plt.Rectangle(
+        (0.0, 0.0), 0.45, 0.2,
+        linewidth=2, edgecolor='red', facecolor='none', linestyle='dashed', label='Fishing grounds'
+        )
+
+    ax.add_patch(fishing_rect)
+    ax.legend()
+
     ax.set_aspect("equal")
     ax.set_xlabel("x")
     ax.set_ylabel("y")
