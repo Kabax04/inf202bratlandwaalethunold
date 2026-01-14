@@ -77,7 +77,6 @@ class Triangle(Cell):
             self._x_mid = None
             self._area = None
             self._edge_points = None
-            self._edge_vector = None
             self._normals = None
             self._velocity = None
             return
@@ -88,7 +87,6 @@ class Triangle(Cell):
         self._x_mid = self._compute_midpoint()
         self._area = self._compute_area()
         self._edge_points = self._compute_edge_points()
-        self._edge_vector = self._compute_edge_vector()
         self._normals = self._compute_normals()
         self._velocity = self._velocity_field()
 
@@ -113,9 +111,6 @@ class Triangle(Cell):
             (p2, p3),
             (p3, p1)
         ]
-
-    def _compute_edge_vector(self):  # REMOVE LATER IF UNUSED !!!!!!!!!!!!!!!!!!!!!!!!
-        return [pj - pi for pi, pj in self._edge_points]
 
     def _compute_normals(self):
         normals = []
@@ -163,12 +158,6 @@ class Triangle(Cell):
         if self._edge_points is None:
             raise RuntimeError("Triangle has no geometry (points=None)")
         return self._edge_points
-
-    @property  # getter for edge_vector
-    def edge_vector(self):
-        if self._edge_vector is None:
-            raise RuntimeError("Triangle has no geometry (points=None)")
-        return self._edge_vector
 
     @property  # getter for normals
     def normals(self):

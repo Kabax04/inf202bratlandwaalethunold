@@ -29,7 +29,7 @@ class Mesh:
 
             for pts in cellData:       # Iterate over each cell in the block
                 if cellType == "line":
-                    cell = Line(cell_id, pts)  # behold hvis Line fortsatt tar (idx, point_ids)
+                    cell = Line(cell_id, pts)  # Create Line cell
                 elif cellType == "triangle":
                     cell = Triangle(point_ids=pts, idx=cell_id, points=self.points)
                 else:
