@@ -41,6 +41,9 @@ Write docstrings for all classes and functions.
 Add some features to video visualization script.
 
 - 15.1
+fix test
+docstrings
+
 - 16.1
 
 ### Week Three
