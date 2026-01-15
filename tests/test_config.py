@@ -1,5 +1,5 @@
 import pytest
-from config import Config
+from src.config import Config
 
 
 def write_toml(tmp_path, content: str):

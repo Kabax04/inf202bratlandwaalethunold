@@ -4,7 +4,7 @@ test_cells.py
 Contains unit tests for the Cell, Line, and Triangle classes in simulation.mesh.cells.
 """
 
-from simulation.mesh.cells import Cell, Line, Triangle
+from src.simulation.mesh.cells import Cell, Line, Triangle
 
 # TESTS FOR CELL INITIALIZATION
 

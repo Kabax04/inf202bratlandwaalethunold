@@ -1,5 +1,5 @@
 import numpy as np
-from simulation.physics.flux import flux, flux_contribution
+from src.simulation.physics.flux import flux, flux_contribution
 
 
 # TESTS FOR flux FUNCTION

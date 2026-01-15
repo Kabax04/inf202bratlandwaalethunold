@@ -7,8 +7,8 @@ Contains unit tests for the Mesh class in simulation.mesh.mesh.
 import numpy as np
 import pytest
 
-from simulation.mesh.mesh import Mesh
-from simulation.mesh.cells import Line, Triangle
+from src.simulation.mesh.mesh import Mesh
+from src.simulation.mesh.cells import Line, Triangle
 
 
 class Block:  # fake class to mimic meshio Block

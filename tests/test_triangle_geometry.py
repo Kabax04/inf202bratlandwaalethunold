@@ -1,6 +1,6 @@
 import numpy as np
 import pytest
-from simulation.mesh.cells import Triangle
+from src.simulation.mesh.cells import Triangle
 
 # TEST TRIANGLE GEOMETRY
 
