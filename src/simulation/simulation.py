@@ -112,26 +112,42 @@ class Simulation:
         # Swap solution and temporary arrays (efficient update without copying)
         self.u, self.u_new = self.u_new, self.u
 
-    def run(self, t_end, writeFrequency=1):
+    def run(self, t_end, writeFrequency=1, logger=None):
         """
         Run the simulation until time t_end, optionally saving plots.
 
         Args:
             t_end (float): Final simulation time.
             writeFrequency (int, optional): Save plot every N steps. None or <=0 disables plotting.
+            logger (logging.Logger, optional): Logger for writing simulation summary / time series.
         """
         self.set_initial_state()
+
+        # Identify fishing ground cells once before time stepping
+        if self.borders is not None:
+            self.find_fishing_ground_cells(self.borders)
 
         # Check if plotting is enabled
         do_plot = (writeFrequency is not None) and (writeFrequency > 0)
         if do_plot:
-            # Create tmp directory for output images
             Path("tmp").mkdir(parents=True, exist_ok=True)
 
         # Calculate number of time steps
         n_steps = int(t_end / self.dt)
+
+        # Optional: log start of oil time series
+        if logger is not None and self.borders is not None:
+            oil0 = self.oil_in_fishing_ground()
+            logger.info(f"fishing_ground_oil t={0.0:.6f} oil={oil0:.12e}")
+
         for step in range(n_steps):
             self.step()
+
+            # Log oil in fishing grounds over time (every step)
+            if logger is not None and self.borders is not None:
+                t = (step + 1) * self.dt
+                oil_fg = self.oil_in_fishing_ground()
+                logger.info(f"fishing_ground_oil t={t:.3f} oil={oil_fg:.6f}")
 
             # Write output at specified frequency
             if do_plot and (step % writeFrequency == 0):
@@ -141,6 +157,13 @@ class Simulation:
                     f"tmp/img_{step:04d}.png",
                     self.borders
                 )
+
+        # Summary line at end
+        if logger is not None and self.borders is not None:
+            oil_final = self.oil_in_fishing_ground()
+            logger.info("Simulation summary:")
+            logger.info(f"  t_end={t_end:.6f}")
+            logger.info(f"  final_fishing_ground_oil={oil_final:.12e}")
 
     def set_initial_state(self, x_start=np.array([0.35, 0.45]), sigma2=0.01):
         """
