@@ -49,6 +49,7 @@ class Config:
         # Read TOML file and parse into dictionary
         with open(path, "rb") as f:
             data = tomllib.load(f)
+            self.raw = data
 
         # Extract required fields from config dictionary
         self.mesh_file = data.get("meshName")

@@ -63,7 +63,9 @@ def main():
 
     # Log simulation parameters
     logger.info("Simulation started.")
-    logger.info(f"dt={config.dt}, n_steps={config.n_steps}, t_end={config.t_end}, mesh={config.mesh_file}")
+    logger.info("Simulation parameters (from TOML):")
+    for k, v in config.raw.items():
+        logger.info(f"  {k} = {v}")
 
     # Build computational mesh and identify neighboring cells
     mesh = Mesh(config.mesh_file)
@@ -71,8 +73,9 @@ def main():
 
     # Create and run finite volume simulation
     sim = Simulation(mesh, config.dt, config.borders)
-    sim.run(config.t_end, writeFrequency=config.write_frequency)
-
+    sim.run(config.t_end, writeFrequency=config.write_frequency, logger=logger)
+    logger.info("Simulation summary (from main):")
+    logger.info(f"  final_fishing_ground_oil = {sim.oil_in_fishing_ground():.12e}")
     borders = config.borders
 
     # Save final solution as image
