@@ -47,17 +47,20 @@ def test_config_happy_path_reads_required_and_defaults(tmp_path):
     p = write_toml(
         tmp_path,
         """
-meshFile = "bay.msh"
-dt = 0.01
+meshName = "bay.msh"
+nSteps = 100
 tEnd = 1.0
+borders = [[0.0, 0.45], [0.0, 0.2]]
 """,
     )
 
     cfg = Config(str(p))
 
     assert cfg.mesh_file == "bay.msh"
+    assert cfg.n_steps == 100
     assert cfg.dt == 0.01
     assert cfg.t_end == 1.0
+    assert cfg.borders == [[0.0, 0.45], [0.0, 0.2]]
 
     assert cfg.write_frequency is None
     assert cfg.log_name == "logfile"
@@ -73,7 +76,7 @@ def test_config_missing_mesh_file_raises(tmp_path):
     p = write_toml(
         tmp_path,
         """
-dt = 0.01
+nSteps = 100
 tEnd = 1.0
 """,
     )
@@ -83,7 +86,7 @@ tEnd = 1.0
     assert "meshFile" in str(excinfo.value)
 
 
-def test_config_dt_must_be_positive(tmp_path):
+def test_config_nSteps_must_be_positive(tmp_path):
     """
     Verify that the time step must be positive
 
@@ -92,15 +95,15 @@ def test_config_dt_must_be_positive(tmp_path):
     """
     p = write_toml(
         tmp_path, """
-meshFile = "bay.msh"
-dt = 0
+meshName = "bay.msh"
+nSteps = 0
 tEnd = 1.0
 """,
     )
 
     with pytest.raises(ValueError) as excinfo:
         Config(str(p))
-    assert "dt must be > 0" in str(excinfo.value)
+    assert "nSteps must be > 0" in str(excinfo.value)
 
 
 def test_config_tend_must_be_positive(tmp_path):
@@ -113,8 +116,8 @@ def test_config_tend_must_be_positive(tmp_path):
     p = write_toml(
         tmp_path,
         """
-meshFile = "bay.msh"
-dt = 0.1
+meshName = "bay.msh"
+nSteps = 100
 tEnd = 0
 """,
     )

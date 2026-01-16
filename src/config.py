@@ -51,8 +51,9 @@ class Config:
             data = tomllib.load(f)
 
         # Extract required fields from config dictionary
-        self.mesh_file = data.get("meshFile")
-        self.dt = data.get("dt")
+        self.mesh_file = data.get("meshName")
+        self.borders = data.get("borders")
+        self.n_steps = data.get("nSteps")
         self.t_end = data.get("tEnd")
 
         # Extract optional fields with default values
@@ -62,12 +63,14 @@ class Config:
         # Validate all configuration values
         self._validate()
 
+        self.dt = self.t_end/self.n_steps
+
     def _validate(self):
         """
         Validate that all required configuration fields are present and valid.
 
         Checks:
-        - All required fields (meshFile, dt, tEnd) are provided
+        - All required fields (meshFile, n_steps, tEnd) are provided
         - dt and tEnd are positive numbers
 
         Raises:
@@ -77,18 +80,48 @@ class Config:
         if self.mesh_file is None:
             raise ValueError("Missing required config entry: meshFile")
 
-        # Check that dt is provided
-        if self.dt is None:
-            raise ValueError("Missing required config entry: dt")
+        # Check that n_steps is provided
+        if self.n_steps is None:
+            raise ValueError("Missing required config entry: nSteps")
 
         # Check that t_end is provided
         if self.t_end is None:
             raise ValueError("Missing required config entry: tEnd")
 
-        # Ensure dt is a positive number (time step must be positive)
-        if self.dt <= 0:
-            raise ValueError("dt must be > 0")
+        # Ensure n_steps is a positive number (number of steps must be positive)
+        if self.n_steps <= 0:
+            raise ValueError("nSteps must be > 0")
+
+        # Ensure n_steps is an integer
+        if not isinstance(self.n_steps, int):
+            raise ValueError("nSteps must be an integer")
 
         # Ensure t_end is a positive number (final time must be positive)
         if self.t_end <= 0:
             raise ValueError("tEnd must be > 0")
+
+        # Check that log_name is provided
+        if self.log_name is not None:
+            if not isinstance(self.log_name, str) or self.log_name.strip() == "":
+                raise ValueError("logName must be a non-empty string")
+
+        if self.borders is None:
+            raise ValueError("Missing required config entry: geometry.borders")
+
+        if (
+            not isinstance(self.borders, list)
+            or len(self.borders) != 2
+            or not all(isinstance(v, list) and len(v) == 2 for v in self.borders)
+        ):
+            raise ValueError("geometry.borders must have format [[x_min, x_max], [y_min, y_max]]")
+
+        x_min, x_max = self.borders[0]
+        y_min, y_max = self.borders[1]
+
+        if not (isinstance(x_min, (int, float)) and isinstance(x_max, (int, float))):
+            raise ValueError("geometry.borders x-limits must be numbers")
+        if not (isinstance(y_min, (int, float)) and isinstance(y_max, (int, float))):
+            raise ValueError("geometry.borders y-limits must be numbers")
+
+        if x_min >= x_max or y_min >= y_max:
+            raise ValueError("geometry.borders must satisfy x_min < x_max and y_min < y_max")

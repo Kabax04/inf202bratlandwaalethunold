@@ -187,7 +187,8 @@ def test_empty_fishing_ground(simple_mesh):
     sim = Simulation(simple_mesh, dt=0.01)
     sim.u[:] = 1.0
 
-    sim.find_fishing_ground_cells()
+    borders = [[0.0, 0.45], [0.0, 0.2]]
+    sim.find_fishing_ground_cells(borders)
 
     if len(sim.fishing_cells) == 0:
         assert sim.oil_in_fishing_ground() == 0.0
@@ -201,9 +202,10 @@ def test_fishing_ground_area_weighted(simple_mesh):
     Then the oil in fishing ground should equal the sum of areas
     of the fishing ground cells.(since u acts as a density here)
     """
+    borders = [[0.0, 0.45], [0.0, 0.2]]
 
     sim = Simulation(simple_mesh, dt=0.01)
-    sim.find_fishing_ground_cells()
+    sim.find_fishing_ground_cells(borders)
 
     for cell in simple_mesh.cells:
         if isinstance(cell, Triangle):
