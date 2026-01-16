@@ -26,7 +26,7 @@ class Simulation:
         sim.run(t_end=1.0, writeFrequency=10)
     """
 
-    def __init__(self, mesh, dt):
+    def __init__(self, mesh, dt, borders=None):
         """
         Initialize simulation with mesh and time step.
 
@@ -36,6 +36,7 @@ class Simulation:
         """
         self.mesh = mesh
         self.dt = dt
+        self.borders = borders
 
         # Solution: one value per cell (cell-centered)
         self.u = np.zeros(len(mesh.cells))
@@ -137,7 +138,8 @@ class Simulation:
                 plot_solution(
                     self.mesh,
                     self.u,
-                    f"tmp/img_{step:04d}.png"
+                    f"tmp/img_{step:04d}.png",
+                    self.borders
                 )
 
     def set_initial_state(self, x_start=np.array([0.35, 0.45]), sigma2=0.01):
@@ -162,7 +164,7 @@ class Simulation:
                 # Boundary cells start at zero
                 self.u[cell.idx] = 0.0
 
-    def find_fishing_ground_cells(self):
+    def find_fishing_ground_cells(self, borders):
         """
         Identify all triangle cells within the fishing ground domain.
 
@@ -175,10 +177,12 @@ class Simulation:
             if not isinstance(cell, Triangle):
                 continue
 
+            x_min, x_max = borders[0]
+            y_min, y_max = borders[1]
             # Get cell centroid
             x, y = cell.x_mid
             # Check if cell is within fishing ground bounds
-            if 0.0 <= x <= 0.45 and 0.0 <= y <= 0.2:
+            if x_min <= x <= x_max and y_min <= y <= y_max:
                 self.fishing_cells.append(cell.idx)
 
     def oil_in_fishing_ground(self):

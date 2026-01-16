@@ -63,21 +63,26 @@ def main():
 
     # Log simulation parameters
     logger.info("Simulation started.")
-    logger.info(f"dt={config.dt}, t_end={config.t_end}, mesh={config.mesh_file}")
+    logger.info(f"dt={config.dt}, n_steps={config.n_steps}, t_end={config.t_end}, mesh={config.mesh_file}")
 
     # Build computational mesh and identify neighboring cells
     mesh = Mesh(config.mesh_file)
     mesh.computeNeighbors()
 
     # Create and run finite volume simulation
-    sim = Simulation(mesh, config.dt)
-    sim.run(config.t_end, writeFrequency=1)
+    sim = Simulation(mesh, config.dt, config.borders)
+    sim.run(config.t_end, writeFrequency=config.write_frequency)
+
+    borders = config.borders
 
     # Save final solution as image
-    plot_solution(mesh, sim.u, "final.png")
+    plot_solution(mesh, sim.u, "final.png", borders)
 
-    # Generate video from output images (if any were saved during simulation)
-    subprocess.run([sys.executable, "src/video.py"])
+    # Generate video if write_frequenzy is not none
+    if config.write_frequency is not None and config.write_frequency > 0:
+        subprocess.run([sys.executable, "src/video.py"])
+    else:
+        print("Video not generated")
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from .simulation.mesh.cells import Triangle
 
 
-def plot_solution(mesh, u, filename, umin=None, umax=None):
+def plot_solution(mesh, u, filename, borders=None, umin=None, umax=None):
     """
     Plot oil distribution on the triangular mesh.
 
@@ -54,13 +54,22 @@ def plot_solution(mesh, u, filename, umin=None, umax=None):
         ax.add_patch(plt.Polygon(pts, color=color))
 
     # Mark the fishing grounds
-    fishing_rect = plt.Rectangle(
-        (0.0, 0.0), 0.45, 0.2,
-        linewidth=2, edgecolor='red', facecolor='none', linestyle='dashed', label='Fishing grounds'
-        )
+    if borders is not None:
+        x_min, x_max = borders[0]
+        y_min, y_max = borders[1]
+        fishing_rect = plt.Rectangle(
+            (x_min, y_min),
+            x_max-x_min,
+            y_max-y_min,
+            linewidth=2,
+            edgecolor='red',
+            facecolor='none',
+            linestyle='dashed',
+            label='Fishing grounds'
+            )
 
-    ax.add_patch(fishing_rect)
-    ax.legend()
+        ax.add_patch(fishing_rect)
+        ax.legend()
 
     ax.set_aspect("equal")
     ax.set_xlabel("x")
