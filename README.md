@@ -12,7 +12,8 @@ Oscar Wiersdalen Thunold (Oggyboggi)
 
 This is an oil spill simulation in a 2D triangular mesh, done as a project for the INF202 course at NMBU.
 
-![Result visualization from final simulation](final.png)
+![Result visualization from final simulation](results/input/final.png)
+
 ***Example visualization of oil spill after simulation***
 
 ## The Project
@@ -61,7 +62,7 @@ Results are saved in `results/<config_name>/`.
 Run all configuration files in a folder:
 
 ```bash
-python -m src.main --find all -f config/
+python -m src.main --find all -f example/
 ```
 
 This will:
