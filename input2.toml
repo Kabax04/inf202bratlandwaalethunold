@@ -1,6 +1,6 @@
 # [settings]
 nSteps = 250
-tEnd = 0.5
+tEnd = 0.4
 
 # [geometry]
 meshName = "bay.msh"

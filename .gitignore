@@ -56,7 +56,7 @@ cover/
 *.pot
 
 # Django stuff:
-*.log
+#*.log  # Uncomment if you want to ignore all log files
 local_settings.py
 db.sqlite3
 db.sqlite3-journal

@@ -39,12 +39,41 @@ pip install -r requirements.txt
 
 ### Running the program
 
-To run the oil spill simulation, execute the main script located in the `src` directory. You can specify configuration options in the `input.toml` file if needed.
+To run the oil spill simulation, execute the main script with a configuration file. The program supports two execution modes:
+
+#### Single config mode (default)
+
+Run a simulation with a single configuration file:
 
 ```bash
 python -m src.main -c input.toml
 ```
-This will run the simulation and generate an image file `final.png` visualizing the oil spill after the simulation, as well as a video file `video.avi` showing the time evolution of the oil spill.
+
+This will run the simulation and generate:
+- `final.png`: Visualization of the oil spill after simulation
+- `video.avi`: Video showing the time evolution of the oil spill (if `write_frequency` is enabled in config)
+- Log file: Detailed simulation output and results
+
+Results are saved in `results/<config_name>/`.
+
+#### Batch mode
+
+Run all configuration files in a folder:
+
+```bash
+python -m src.main --find all -f config/
+```
+
+This will:
+- Find all `.toml` files in the specified folder
+- Run each configuration sequentially
+- Create separate result folders for each simulation
+
+You can also search the current directory by omitting the `-f` option:
+
+```bash
+python -m src.main --find all
+```
 
 ***Warning: The simulation may take several minutes to complete depending on the mesh size and number of time steps.***
 
