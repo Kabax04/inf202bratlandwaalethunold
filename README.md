@@ -100,16 +100,18 @@ The class currently supports line and triangle cells. Other cell types are ignor
 
 #### cells/Cell
 
-The abstract base class for mesh cells. Provides common functionality for all cell types.
+The base class for mesh cells. Provides common functionality for all cell types.
 
 **Key attributes:**
 - `idx`: Integer index of the cell.
 - `point_ids`: List of indices of points that define the cell.
-- `neighbors`: List of indices of neighboring cells.
+- `neighbors`: List of indices of neighboring cells (populated by `compute_neighbors`).
 
 **Key methods:**
-- `compute_neighbors(cell_list)`: Finds and stores neighboring cells that share two points.
-- `__str__()`: Abstract method for string representation (implemented by subclasses).
+- `compute_neighbors(cell_list)`: Finds and stores neighboring cells that share exactly two points (an edge). For `Triangle` cells, also maps each edge to its neighboring cell index in `edge_to_neighbor`.
+- `__str__()`: Returns a string representation of the cell.
+
+**Note:** This class is intended as a base class. Use `Line` or `Triangle` subclasses for actual mesh elements.
 
 ---
 
