@@ -2,16 +2,23 @@
 test_cells.py
 
 Contains unit tests for the Cell, Line, and Triangle classes in simulation.mesh.cells.
+
+The tests cover:
+- Object initialization and default values
+- string representations (__str__)
+- and neighbor detection logic for Triangle cells.
 """
 
 from src.simulation.mesh.cells import Cell, Line, Triangle
 
-# TESTS FOR CELL INITIALIZATION
-
 
 def test_cell_init_sets_fields():
     """
-    Tests that the Cell constructor correctly initializes the id, point_ids, and neighbors attributes.
+    Verify that cell initialization sets idx, point_ids, and neighbors correctly.
+
+    Expected Behavior:
+    - idx is stored as given
+    - point_ids starts as an empty list
     """
     c = Cell(idx=7, point_ids=(1, 2, 3))
 
@@ -19,12 +26,10 @@ def test_cell_init_sets_fields():
     assert c.point_ids == [1, 2, 3]   # converts to list
     assert c.neighbors == []          # starts empty
 
-# TESTS FOR __str__ METHODS
-
 
 def test_cell_str():
     """
-    Tests that the Cell __str__ method returns the expected string representation.
+    Verify that Cell.__str__ returns the expected string representation.
     """
     c = Cell(idx=1, point_ids=[9, 8])
     assert str(c) == "Cell 1: points=[9, 8]"
@@ -32,7 +37,7 @@ def test_cell_str():
 
 def test_line_str():
     """
-    Tests that the Line __str__ method returns the expected string representation.
+    Verify that Line.__str__ returns the expected string representation.
     """
     line = Line(idx=2, point_ids=[0, 1])
     assert str(line) == "Line 2: points=[0, 1]"
@@ -40,21 +45,21 @@ def test_line_str():
 
 def test_triangle_str():
     """
-    Tests that the Triangle __str__ method returns the expected string representation.
+    Verify that Triangle.__str__ returns the expected string representation.
     """
     triangle = Triangle(idx=3, point_ids=[1, 2, 3])
     assert str(triangle) == "Triangle 3: points=[1, 2, 3]"
 
-# TESTS FOR NEIGHBOR COMPUTATION IN TRIANGLE CLASS
-
 
 def test_compute_neighbors_finds_one_neighbor_when_two_points_match():
     """
-    Tests that compute_neighbors adds a neighbor when two cells share exactly two points.
+    Verify that compute_neighbors adds a neighbor when exactly two points are shared.
+
+    Two triangle cells are considered neighbors if they share exactly two point indices.
     """
     t1 = Triangle(idx=0, point_ids=[0, 1, 2])
-    t2 = Triangle(idx=1, point_ids=[1, 2, 3])   # shares points 1 and 2
-    t3 = Triangle(idx=2, point_ids=[4, 5, 6])   # shares no points
+    t2 = Triangle(idx=1, point_ids=[1, 2, 3])   # shares points {1, 2} with t1
+    t3 = Triangle(idx=2, point_ids=[4, 5, 6])   # shares no points with t1
 
     t1.compute_neighbors([t1, t2, t3])
 
@@ -63,11 +68,14 @@ def test_compute_neighbors_finds_one_neighbor_when_two_points_match():
 
 def test_compute_neighbors_adds_multiple_neighbors():
     """
-    Tests that compute_neighbors can add multiple neighbors.
+    Verify that compute_neighbors can detect multiple neighbors.
+
+    If multiple triangle cells share exactly two points with the target cell,
+    all corresponding indices should be added.
     """
     t1 = Triangle(idx=0, point_ids=[0, 1, 2])
-    t2 = Triangle(idx=1, point_ids=[1, 2, 3])   # shares 1 and 2
-    t3 = Triangle(idx=2, point_ids=[0, 2, 4])   # shares 1 and 2
+    t2 = Triangle(idx=1, point_ids=[1, 2, 3])   # shares points {1, 2} with t1
+    t3 = Triangle(idx=2, point_ids=[0, 2, 4])   # shares points {0, 2} with t1
 
     t1.compute_neighbors([t1, t2, t3])
 
@@ -76,10 +84,12 @@ def test_compute_neighbors_adds_multiple_neighbors():
 
 def test_compute_neighbors_does_not_add_neighbor_if_only_one_point_matches():
     """
-    Tests that compute_neighbors does NOT add a neighbor if only one point is shared.
+    Verify that compute_neighbors does not add a neighbor if only one point is shared
+
+    Sharing a single point is not sufficient for triangles to be neighbors.
     """
     t1 = Triangle(idx=0, point_ids=[0, 1, 2])
-    t2 = Triangle(idx=1, point_ids=[2, 7, 8])  # shares only point 2 (1 match)
+    t2 = Triangle(idx=1, point_ids=[2, 7, 8])  # shares only point 2 with t1
 
     t1.compute_neighbors([t2])
 
@@ -88,10 +98,13 @@ def test_compute_neighbors_does_not_add_neighbor_if_only_one_point_matches():
 
 def test_compute_neighbors_does_not_add_neighbor_if_three_points_match():
     """
-    Tests that compute_neighbors does NOT add a neighbor if all points match (3 matches).
+    Verify that compute neighbors does not add a neighbor if all three points match.
+
+    Identical triangles (sharing all three points) should be treated as neighbors
+    via the "share exactly two points" rule.
     """
     t1 = Triangle(idx=0, point_ids=[0, 1, 2])
-    t2 = Triangle(idx=1, point_ids=[0, 1, 2])  # shares 3 points
+    t2 = Triangle(idx=1, point_ids=[0, 1, 2])  # shares all three points
 
     t1.compute_neighbors([t2])
 
@@ -100,7 +113,7 @@ def test_compute_neighbors_does_not_add_neighbor_if_three_points_match():
 
 def test_compute_neighbors_does_not_add_self_as_neighbor():
     """
-    Tests that a cell does not add itself as a neighbor.
+    Verify that a cell does not add itself to its neighbor list..
     """
     t1 = Triangle(idx=0, point_ids=[0, 1, 2])
 
