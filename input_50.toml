@@ -1,6 +1,6 @@
 # [settings]
-nSteps = 250
-tEnd = 0.4
+nSteps = 50
+tEnd = 0.5
 
 # [geometry]
 meshName = "bay.msh"
@@ -8,4 +8,4 @@ borders = [[0.0, 0.45], [0.0, 0.2]] # borders of the fishing fields
 
 # [IO]
 logName = "log"
-writeFrequency = 20
+writeFrequency = 1

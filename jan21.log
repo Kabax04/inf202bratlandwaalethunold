@@ -1,0 +1,644 @@
+commit 31d8188458b1594efe412ecbf48b5d49bf18764e
+Merge: 1a5dc35 8c81d32
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Wed Jan 21 10:22:55 2026 +0100
+
+    Merge pull request #57 from Kabax04/report
+    
+    Add report on oil spill simulation, including introduction, user guid…
+
+commit 8c81d32dda6d47f1b3fa30771eb0d7351edf2ffc
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Wed Jan 21 10:21:30 2026 +0100
+
+    Add report on oil spill simulation, including introduction, user guide, code structure, and results. closes #1
+
+commit 1a5dc35630f65831257df87f96d43da19417cc96
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Tue Jan 20 11:25:21 2026 +0100
+
+    Updated docstrings
+
+commit bd35108d5a26db08815b3900436fb831161b1f7a
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Mon Jan 19 12:28:37 2026 +0100
+
+    Refine documentation for cells/Cell class: clarify attributes and methods, and emphasize usage of subclasses.
+
+commit 901b36dc8394f8780418eebfdfa09ca7bb9f280e
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Mon Jan 19 10:44:01 2026 +0100
+
+    Fix image path in README and update batch mode example folder
+
+commit 2cd8e0660da00cbf05b3b76317568baf0d17e7c3
+Merge: 3f02305 0629b9a
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Mon Jan 19 10:36:30 2026 +0100
+
+    Merge pull request #56 from Kabax04/multi_toml
+    
+    Add simulation result folder checks and batch processing support
+
+commit 0629b9a6c5c3f4f7af607163b1932073514a253e
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Mon Jan 19 10:33:53 2026 +0100
+
+    Add simulation result folder checks and batch processing support
+    
+    - Introduced `looks_like_result_folder` function to verify if a directory contains simulation results, preventing accidental overwrites.
+    - Refactored main simulation logic into `run_single_config` for better organization and to support batch processing of configuration files.
+    - Enhanced command-line interface to allow batch mode execution with `--find all` option to run all TOML config files in a specified folder.
+    - Added safety checks for result folder creation and logging setup.
+    - Updated video generation process to ensure generated videos are stored in the correct result folder.
+    - Added new video file `video.avi` to the results directory.
+    
+    Closes #55
+
+commit 3f0230560f53b4c2765249077a7c725e1b6b322a
+Merge: d2c5621 da5bfca
+Author: Tobias Wåle <73117013+Twaale@users.noreply.github.com>
+Date:   Fri Jan 16 12:53:14 2026 +0100
+
+    Merge pull request #54 from Kabax04/oil_logger
+    
+    Enhance logging in simulation and main modules. Add raw configuration…
+
+commit da5bfcabb5fb5d9fcebc131189db9ab927a38132
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Fri Jan 16 12:51:39 2026 +0100
+
+    Enhance logging in simulation and main modules. Add raw configuration data logging in main, and improve simulation run method to include detailed logging of oil levels in fishing grounds at each step and summary at the end. closes #53
+
+commit d2c56214eb17aee2270b9c9a41625d70c874f894
+Merge: 83f3dc5 ce9a3c1
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Fri Jan 16 12:11:29 2026 +0100
+
+    Merge pull request #52 from Kabax04/improve-toml
+    
+    Refactor configuration and simulation parameters for clarity and func…
+
+commit ce9a3c1870c97d9a2a5dbe3ba2850efd499c03f2
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Fri Jan 16 12:09:50 2026 +0100
+
+    Refactor configuration and simulation parameters for clarity and functionality. Update input TOML structure, enhance Config class to validate new parameters, and modify simulation and plotting functions to utilize updated configuration. Adjust tests to reflect changes in configuration structure and validation. closes #51
+
+commit 83f3dc5890656efae835fd58023de9a73a2ad9ff
+Merge: 54751cb bff01a0
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Thu Jan 15 14:06:55 2026 +0100
+
+    Merge pull request #49 from Kabax04/docstrings
+    
+    Enhance docstrings for Cell, Line, and Triangle classes to improve cl…
+
+commit bff01a0407829749dc27011cde270e5b920ed83a
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Thu Jan 15 14:06:10 2026 +0100
+
+    Enhance docstrings across test files for improved clarity and detail. Add descriptions for functions, parameters, and expected behaviors in test_config.py, test_flux.py, test_mesh.py, test_simulation.py, and test_triangle_geometry.py. ref #5
+
+commit fff4609c50edc673180dbd97e5ef00b4e364e2ba
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Thu Jan 15 14:02:50 2026 +0100
+
+    Update daily log with test fixes and docstring enhancements
+
+commit c8525b51bf77d1add23843e15da525dcdaef1d37
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Thu Jan 15 13:05:35 2026 +0100
+
+    config: Enhance docstrings in Config class for improved clarity and detail. Add descriptions for attributes, arguments, and validation checks. Include usage examples and raise appropriate exceptions for missing or invalid values. ref #5
+
+commit 41b39d970efe922f76ae50b00602f9acc7581b0f
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Thu Jan 15 12:57:25 2026 +0100
+
+    logger: Enhance docstring for setup_logger function to improve clarity and detail. Add descriptions for arguments, return value, and usage example. Include additional comments for better understanding of the code flow. ref #5
+
+commit 7e8aa32349062cf3fb3861336478f2052c5b7914
+Merge: d2e4049 1eb9401
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Thu Jan 15 12:50:37 2026 +0100
+
+    Merge branch 'docstrings' of https://github.com/Kabax04/inf202bratlandwaalethunold into docstrings
+
+commit d2e404952449ef04c08ba9bc4ede48cad497fd42
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Thu Jan 15 12:50:34 2026 +0100
+
+    main: Enhance docstring for main function to improve clarity and detail. Add descriptions for command-line arguments, return values, exceptions, and usage example. ref #5
+
+commit 1eb94019aa7ef210f014180e1a87504e7f385868
+Merge: 54bab6d 0f7deea
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Thu Jan 15 12:45:10 2026 +0100
+
+    Merge branch 'docstrings' of https://github.com/Kabax04/inf202bratlandwaalethunold into docstrings
+
+commit 54bab6d3f291f59cb202c6fa1ee132cdc8087f59
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Thu Jan 15 12:45:02 2026 +0100
+
+    video.py, Enhance docstring for video generation script to improve clarity and detail. Include usage information and description of parameters. ref #5
+
+commit 0f7deea98d8d0c4b7b506e98db9c3a1d0257b74d
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Thu Jan 15 12:36:37 2026 +0100
+
+    sim: Enhance docstrings for Simulation class and its methods to improve clarity and detail. Add attribute, argument, and return descriptions, along with usage examples. ref #5
+
+commit 994c437ae8466278b34f083f7f6d4330aa97679a
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Thu Jan 15 12:26:59 2026 +0100
+
+    mesh: Enhance docstrings for Mesh class and its methods to improve clarity and detail. Add attribute and argument descriptions, along with usage examples. ref #5
+
+commit 4823532f5c5d2eae2d161af5f633af8241a8d937
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Thu Jan 15 12:10:42 2026 +0100
+
+    Enhance docstrings for flux and flux_contribution functions to improve clarity and detail. Add parameter descriptions for better understanding. ref #5
+
+commit e3fdb42f9109f18d7a6552ca1fada979465a9086
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Thu Jan 15 12:03:25 2026 +0100
+
+    Enhance docstrings for Cell, Line, and Triangle classes to improve clarity and detail. Add examples and attribute descriptions for better understanding. ref #5
+
+commit 54751cbbaea179d846c5b3bd39a8dd71a25f00eb
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Thu Jan 15 11:13:45 2026 +0100
+
+    Small test fix: Add pytest configuration and update import paths in test files
+
+commit 264c838b59c0f6d1c759ef15be169772e0eb6755
+Merge: 2d26e5d 7c25c45
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Wed Jan 14 13:03:34 2026 +0100
+
+    Merge pull request #48 from Kabax04/finalreadme
+    
+    Revise README.md for clarity and structure; update project introducti…
+
+commit 7c25c4530586d7257ccb41ec831531df3ad291e8
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Wed Jan 14 13:01:40 2026 +0100
+
+    Revise README.md for clarity and structure; update project introduction, usage instructions, and class documentation. Closes #46
+
+commit 2d26e5dba399ad1d68b846e0e84e9fe7ca3bd7a8
+Merge: 0f5ece7 64c00f4
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Wed Jan 14 12:45:23 2026 +0100
+
+    Merge pull request #47 from Kabax04/logger
+    
+    Implement logging setup in main simulation script and create logger u…
+
+commit 64c00f48bb7f7a42227ff2b9a5a4e21e3b0f08b9
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Wed Jan 14 12:44:13 2026 +0100
+
+    Implement logging setup in main simulation script and create logger utility. closes #45
+
+commit 0f5ece73248075e768e27b06fc7f9476ef83f8cc
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Wed Jan 14 12:43:03 2026 +0100
+
+    Minor changes, add fishing grounds to plot
+
+commit f92791bc39dee5d615403e670437c12af080bba6
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Wed Jan 14 11:22:47 2026 +0100
+
+    flake8 fix
+
+commit 348c993edb710d3c3ee88f47bda5169336d6ee85
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Wed Jan 14 11:22:00 2026 +0100
+
+    Enhance simulation functionality and testing
+    
+    - Implement edge vector property in Triangle class.
+    - Update simulation to conditionally create plot directory.
+    - Modify test to disable plotting for efficiency.
+    - Improve documentation and add features to visualization script.
+
+commit 74a9b2d8ba061ddbfe21659c0f39bbc80112cdb9
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Wed Jan 14 09:50:07 2026 +0100
+
+    Cleanup:
+    Update requirements and refactor Triangle class in mesh simulation
+    
+    - Added opencv-python to requirements.txt
+    - Removed unused _edge_vector attribute and related methods from Triangle class
+    - Improved comments for clarity in mesh.py
+
+commit 5efb4f69d083f3369eaadc5738463db09f2bf568
+Merge: 8a29dfc 343b02c
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Tue Jan 13 14:22:41 2026 +0100
+
+    Merge pull request #44 from Kabax04/video
+    
+    Add video.py for creating video. closes #41
+
+commit 343b02c7969ef1694c344951d05992750410da53
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Tue Jan 13 14:21:32 2026 +0100
+
+    Add video.py for creating video. closes #41
+
+commit 8a29dfc4414a0bce38f97645a029c53fcb1fb796
+Merge: 57ceb40 d2b3a27
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Tue Jan 13 12:58:07 2026 +0100
+
+    Merge pull request #43 from Kabax04/plotting
+    
+    Add plotting functionality and update simulation parameters. Closes #40
+
+commit d2b3a277fcb99b5d489feed9d04556d751c0a0d5
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Tue Jan 13 12:55:14 2026 +0100
+
+    Add plotting functionality and update simulation parameters. Closes #40
+    
+    - Introduced a new `plot_solution` function to visualize oil distribution on the triangular mesh.
+    - Updated time step (`dt`) in `input.toml` for improved simulation accuracy.
+    - Modified `main.py` to call the new plotting function after simulation execution.
+     + Enhanced neighbor computation in `Cell` class to support edge-to-neighbor tracking for triangles.
+
+commit 57ceb402ed288c4748f75760c4b5697a4ca596ca
+Merge: 2f76ddb 0a23bc2
+Author: Tobias Wåle <73117013+Twaale@users.noreply.github.com>
+Date:   Tue Jan 13 12:37:40 2026 +0100
+
+    Merge pull request #42 from Kabax04/test_config
+    
+    Add configuration tests for TOML file handling and validation. closes…
+
+commit 0a23bc24e994779d9797e9a063dbf197eea05779
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Tue Jan 13 12:31:10 2026 +0100
+
+    Add configuration tests for TOML file handling and validation. closes #38
+
+commit 2f76ddb28c038886dcf224cd59d369454bf7816b
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Tue Jan 13 11:47:08 2026 +0100
+
+    Update requirements.txt with matplotlib
+
+commit ac934b573267be3f3e358d46995a9b81d49fd945
+Merge: 2ae6263 fe98616
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Tue Jan 13 11:17:44 2026 +0100
+
+    Merge pull request #39 from Kabax04/config_implementation
+    
+    Implement configuration management and simulation execution from TOML…
+
+commit fe98616f0266a8107dd23be29fcfeff03cf80479
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Tue Jan 13 11:15:40 2026 +0100
+
+    Implement configuration management and simulation execution from TOML file. Closes #37
+
+commit 2ae62632735145fefd9d1ba037d5f4d6f0a47195
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Tue Jan 13 10:21:53 2026 +0100
+
+    Write tests for initial state and fishing grounds and stability. Closes #31
+
+commit 35b4ca19596e28d686f15d3b93080be3805d2e2b
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Tue Jan 13 09:48:53 2026 +0100
+
+    Small changes: Fix set_initial_state and find_fishing_ground_cells methods: correct midpoint assignment and improve fishing cell identification logic.
+
+commit ebd03d0acef1c9dfb398f7ca09f45c63ed14e6fe
+Merge: 0d5df02 f17d1e7
+Author: Tobias Wåle <73117013+Twaale@users.noreply.github.com>
+Date:   Mon Jan 12 13:40:19 2026 +0100
+
+    Merge pull request #36 from Kabax04/fishing_grounds
+    
+    Add methods to identify fishing ground cells and calculate oil in tho…
+
+commit f17d1e781802380ac81c7e847c17963e2ea22157
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Mon Jan 12 13:38:33 2026 +0100
+
+    Add methods to identify fishing ground cells and calculate oil in those areas. closes #30
+
+commit 0d5df02a3231de750a9f8009b1eb10981605e304
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Mon Jan 12 13:38:20 2026 +0100
+
+    Update README.md and dailyLog.md: document Simulation class and enhance daily log with recent changes
+
+commit a1ecb24cdaccd58215de55295438030c98e6b945
+Merge: 0494d35 ce487f0
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Mon Jan 12 13:29:02 2026 +0100
+
+    Merge pull request #35 from Kabax04/test_simulation
+    
+    Enhance Simulation class: add boundary condition for line cells and s…
+
+commit ce487f0c1276263f43b0b461d26981c2d29b701e
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Mon Jan 12 13:26:01 2026 +0100
+
+    Enhance Simulation class: add boundary condition for line cells and skip updates for non-positive area cells; add tests for simulation behavior with new mesh. Closes #28
+
+commit 0494d35d889067f0574f3fbd6828834d0ce266ee
+Merge: 1919a60 61734e4
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Mon Jan 12 13:17:03 2026 +0100
+
+    Merge pull request #34 from Kabax04/initial_state
+    
+    Minor changes on step(), add set_initial_state(), closes #29
+
+commit 61734e45118f4d65bb1fec2c2ef1885823156cf7
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Mon Jan 12 13:14:57 2026 +0100
+
+    Minor changes on step(), add set_initial_state(), closes #29
+
+commit 1919a60998bd6c05095e92d882f57eaaefc562b3
+Merge: b0f1143 2c2d86e
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Mon Jan 12 12:17:11 2026 +0100
+
+    Merge pull request #33 from Kabax04/core_simulation
+    
+    Implement Triangle class enhancements and add Simulation class for ti…
+
+commit 2c2d86ea6f3c0aa594bea8572f7f7dadf1eeb703
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Mon Jan 12 12:14:33 2026 +0100
+
+    Implement Triangle class enhancements and add Simulation class for time-stepping. closes #27
+
+commit b0f11432a116cec9a1ee808c3a51ef547b17c6df
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Mon Jan 12 10:30:12 2026 +0100
+
+    Update README and daily log for clarity and testing instructions
+
+commit 01599ceda15e868576b528d185d7a80594b21087
+Merge: f0d32e4 1fda8dc
+Author: Tobias Wåle <73117013+Twaale@users.noreply.github.com>
+Date:   Mon Jan 12 10:17:48 2026 +0100
+
+    Merge pull request #32 from Kabax04/test_flux
+    
+    Add unit tests for flux and flux_contribution functions. closes #22
+
+commit 1fda8dc975b3d5a499f24b8a4938a2f742732c0d
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Mon Jan 12 10:15:59 2026 +0100
+
+    Add unit tests for flux and flux_contribution functions. closes #22
+
+commit f0d32e4e9982ed192d9520d2fcc66ac1d2b6674d
+Merge: 7a8ef14 cb7eb11
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Fri Jan 9 13:49:25 2026 +0100
+
+    Merge pull request #26 from Kabax04/flux-function
+    
+    Add flux and flux_contribution functions. closes #18
+
+commit cb7eb1142ef4a1a6de35453d7af17ba447601100
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Fri Jan 9 13:48:12 2026 +0100
+
+    Add flux and flux_contribution functions. closes #18
+
+commit 7a8ef142e1491f762e28578009d8ff1c0bd237df
+Merge: 9b11501 2a9099a
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Fri Jan 9 13:43:50 2026 +0100
+
+    Merge pull request #25 from Kabax04/testtrianglesvectors
+    
+    Add unit tests for Triangle geometry and properties. Closes #17
+
+commit 2a9099a38ec8aad1cde376d4405ccc33051aae08
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Fri Jan 9 13:28:51 2026 +0100
+
+    Add unit tests for Triangle geometry and properties. Closes #17
+
+commit 9b115011aea95e1fec9276dab25f1212f5872d25
+Merge: f1e0e50 65fb60f
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Fri Jan 9 12:15:21 2026 +0100
+
+    Merge pull request #24 from Kabax04/january9docupdate
+    
+    Update README and daily log with project structure and recent develop…
+
+commit 65fb60f34071f0b00c7377deb032aea7a91f10d3
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Fri Jan 9 12:13:00 2026 +0100
+
+    Update README and daily log with project structure and recent developments. Closes #21
+
+commit f1e0e501bdffff8ac1c617e2eb04942090924ffb
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Fri Jan 9 12:10:15 2026 +0100
+
+    Remove ABC inheritance from Cell class to simplify implementation
+
+commit 8e5eb442c20284ff2fd71f83e30fa22e083130f3
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Fri Jan 9 12:09:08 2026 +0100
+
+    Refactor Cell class to use 'idx' instead of 'id' and update Triangle initialization for better handling of points. Improve string representation for Cell and Triangle classes.
+
+commit 1ff613b36a3c12b8d273def2c25e669e69b55729
+Merge: 3cc4275 076fe88
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Fri Jan 9 11:37:14 2026 +0100
+
+    Merge pull request #23 from Kabax04/compute_vectors
+    
+    Add functions for computing vectors, and some minor fixes. closes #15
+
+commit 076fe88c5fb46d77741e7ac1f593b9e676f62251
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Fri Jan 9 11:35:26 2026 +0100
+
+    Add functions for computing vectors, and some minor fixes. closes #15
+
+commit 3cc42756d1b57fcf3b906c0cb3a8ccfe7566164b
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Fri Jan 9 10:40:21 2026 +0100
+
+    Add files via upload
+
+commit b147b5b0577e4886584c56187db026810facee66
+Merge: f71eac1 0c0568d
+Author: Tobias Wåle <73117013+Twaale@users.noreply.github.com>
+Date:   Thu Jan 8 14:29:06 2026 +0100
+
+    Merge pull request #20 from Kabax04/test_triangle
+    
+    Test triangle
+
+commit 0c0568d0318e3e1dffb52a429582237b386568bd
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Thu Jan 8 14:26:23 2026 +0100
+
+    Refactor Triangle initialization and update tests for consistency. closes #10
+
+commit f71eac135e6a9a9ed0685dc74dd749d589d971c6
+Merge: b8b7954 8bc23a6
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Thu Jan 8 12:58:38 2026 +0100
+
+    Merge pull request #16 from Kabax04/daily_log
+    
+    Add daily log file to track progress and tasks, closes #13
+
+commit c668395971647d9d8e379e2026072c0b1001f5d0
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Thu Jan 8 12:49:09 2026 +0100
+
+    Added docstrings, changed point_id to idx
+
+commit 8bc23a66beef9d547e49c83fd364ecc6df2060e9
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Thu Jan 8 12:45:45 2026 +0100
+
+    Add daily log file to track progress and tasks, closes #13
+
+commit b8b7954f4520cd7500bce2cb9a5dcf395c658ce8
+Merge: 6eb52c0 393cf74
+Author: Twaale <73117013+Twaale@users.noreply.github.com>
+Date:   Thu Jan 8 12:20:22 2026 +0100
+
+    Merge pull request #14 from Kabax04/triangle-geometry
+    
+    add triangle geometry: area and midpoint. Closes #9
+
+commit 393cf7450f442c2af7b2ca676f11d97a85451368
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Thu Jan 8 12:13:51 2026 +0100
+
+    add triangle geometry: area and midpoint. Closes #9
+
+commit 6eb52c0b9230864c81b28acd959b9c646445a905
+Merge: deca72c 3e25f39
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Thu Jan 8 11:26:37 2026 +0100
+
+    Merge pull request #12 from Kabax04/requirements
+    
+    Add requirements file with current dependencies, closes #11
+
+commit 3e25f39c8df6b6c0f1536a141d75bc790f8950f6
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Thu Jan 8 11:21:01 2026 +0100
+
+    Add requirements file with current dependencies, closes #11
+
+commit deca72c71661743c4c7d49905bea9898e169ab13
+Merge: 3baaacf 34e0734
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Wed Jan 7 14:12:13 2026 +0100
+
+    Merge pull request #8 from Kabax04/testing
+    
+    Add initial test suite and implement tests for Cell and Mesh classes.…
+
+commit 34e0734942c7c3985bf93e402d945e246109a99d
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Wed Jan 7 14:08:44 2026 +0100
+
+    Add initial test suite and implement tests for Cell and Mesh classes. closes #6
+
+commit 3baaacf37bab9500031f68339b7ef5c5ac2c312e
+Merge: 208244c c1fb344
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Wed Jan 7 13:19:52 2026 +0100
+
+    Merge pull request #7 from Kabax04/neighbor_detection
+    
+    Implement neighbor computation for mesh cells, closes #4
+
+commit c1fb3445c5ae2245549a6ab636b03d17deb96f0e
+Author: Tobias Wåle <tobias.g.wale@nmbu.no>
+Date:   Wed Jan 7 13:14:19 2026 +0100
+
+    Implement neighbor computation for mesh cells, closes #4
+
+commit 208244c5547720550d35139e827f1e20800bc366
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Wed Jan 7 11:26:50 2026 +0100
+
+    Refactor folder structure to better align with lecture 3
+
+commit 71fceb63fdc348273fafbe80d8ad201b2ccdd2ce
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Tue Jan 6 13:31:50 2026 +0100
+
+    Implement Cell, Line, and Triangle classes; add Mesh class for reading mesh files. Closes #3
+
+commit 80de3d1b89766778335b6e5ecc42b0a8f19ab67d
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Tue Jan 6 11:52:44 2026 +0100
+
+    restructure a little bit
+
+commit eebd61bee2ba9fcb7c4d48739745a67c87a23075
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Tue Jan 6 10:02:26 2026 +0100
+
+    Update README with project description and class structure mockup
+
+commit 04c59e6b6370099ff5a83b91a4a83ed1c08a2ca6
+Author: Kabax04 <jonas@bratland.no>
+Date:   Mon Jan 5 15:47:05 2026 +0100
+
+    Add goal to README
+
+commit 7348277ebf6ead7399498f664e355ed6496600fa
+Merge: 54ed24d bad23e2
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Mon Jan 5 12:00:43 2026 +0100
+
+    Merge branch 'main' of https://github.com/Kabax04/inf202bratlandwaalethunold
+
+commit 54ed24dfdd53bef41b2f629441e67bc53a811b5c
+Author: Jonas Okkenhaug Bratland <jonas.okkenhaug.bratland@nmbu.no>
+Date:   Mon Jan 5 12:00:40 2026 +0100
+
+    Add .gitkeep files to src/mesh and src/simulation directories
+
+commit bad23e2a2404ffc2ac37a6c31df0051ebae5676f
+Author: Oscar Wiersdalen Thunold <79252382+Oggyboggi@users.noreply.github.com>
+Date:   Mon Jan 5 11:55:30 2026 +0100
+
+    Add files via upload
+
+commit b397a61a6f441cbde58563257f1f4eec52432409
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Mon Jan 5 11:30:14 2026 +0100
+
+    Update project title and author formatting in README
+
+commit a0655e39111b8c3e9040f44f75d0f1d6fbc0cef5
+Author: Jonas Bratland <73945701+Kabax04@users.noreply.github.com>
+Date:   Mon Jan 5 11:27:08 2026 +0100
+
+    Initial commit

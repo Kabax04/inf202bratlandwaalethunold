@@ -8,4 +8,4 @@ borders = [[0.0, 0.45], [0.0, 0.2]] # borders of the fishing fields
 
 # [IO]
 logName = "log"
-writeFrequency = 20
+writeFrequency = 1

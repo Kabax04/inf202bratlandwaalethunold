@@ -1,0 +1,65 @@
+2026-01-21 10:01:18,454 - INFO - oil_simulation - Simulation started.
+2026-01-21 10:01:18,454 - INFO - oil_simulation - Config file: input_50.toml
+2026-01-21 10:01:18,454 - INFO - oil_simulation - Simulation parameters (from TOML):
+2026-01-21 10:01:18,454 - INFO - oil_simulation -   nSteps = 50
+2026-01-21 10:01:18,454 - INFO - oil_simulation -   tEnd = 0.5
+2026-01-21 10:01:18,454 - INFO - oil_simulation -   meshName = bay.msh
+2026-01-21 10:01:18,454 - INFO - oil_simulation -   borders = [[0.0, 0.45], [0.0, 0.2]]
+2026-01-21 10:01:18,454 - INFO - oil_simulation -   logName = log
+2026-01-21 10:01:18,455 - INFO - oil_simulation -   writeFrequency = 2
+2026-01-21 10:01:31,579 - INFO - oil_simulation - fishing_ground_oil t=0.000000 oil=5.849449988321e-06
+2026-01-21 10:01:31,631 - INFO - oil_simulation - fishing_ground_oil t=0.010 oil=0.000007
+2026-01-21 10:01:36,702 - INFO - oil_simulation - fishing_ground_oil t=0.020 oil=0.000009
+2026-01-21 10:01:36,752 - INFO - oil_simulation - fishing_ground_oil t=0.030 oil=0.000011
+2026-01-21 10:01:41,634 - INFO - oil_simulation - fishing_ground_oil t=0.040 oil=0.000013
+2026-01-21 10:01:41,687 - INFO - oil_simulation - fishing_ground_oil t=0.050 oil=0.000016
+2026-01-21 10:01:46,541 - INFO - oil_simulation - fishing_ground_oil t=0.060 oil=0.000019
+2026-01-21 10:01:46,594 - INFO - oil_simulation - fishing_ground_oil t=0.070 oil=0.000023
+2026-01-21 10:01:51,461 - INFO - oil_simulation - fishing_ground_oil t=0.080 oil=0.000028
+2026-01-21 10:01:51,516 - INFO - oil_simulation - fishing_ground_oil t=0.090 oil=0.000033
+2026-01-21 10:01:56,484 - INFO - oil_simulation - fishing_ground_oil t=0.100 oil=0.000039
+2026-01-21 10:01:56,534 - INFO - oil_simulation - fishing_ground_oil t=0.110 oil=0.000047
+2026-01-21 10:02:01,446 - INFO - oil_simulation - fishing_ground_oil t=0.120 oil=0.000056
+2026-01-21 10:02:01,497 - INFO - oil_simulation - fishing_ground_oil t=0.130 oil=0.000066
+2026-01-21 10:02:06,382 - INFO - oil_simulation - fishing_ground_oil t=0.140 oil=0.000078
+2026-01-21 10:02:06,433 - INFO - oil_simulation - fishing_ground_oil t=0.150 oil=0.000091
+2026-01-21 10:02:11,320 - INFO - oil_simulation - fishing_ground_oil t=0.160 oil=0.000107
+2026-01-21 10:02:11,370 - INFO - oil_simulation - fishing_ground_oil t=0.170 oil=0.000125
+2026-01-21 10:02:16,219 - INFO - oil_simulation - fishing_ground_oil t=0.180 oil=0.000145
+2026-01-21 10:02:16,275 - INFO - oil_simulation - fishing_ground_oil t=0.190 oil=0.000169
+2026-01-21 10:02:21,159 - INFO - oil_simulation - fishing_ground_oil t=0.200 oil=0.000195
+2026-01-21 10:02:21,215 - INFO - oil_simulation - fishing_ground_oil t=0.210 oil=0.000225
+2026-01-21 10:02:26,057 - INFO - oil_simulation - fishing_ground_oil t=0.220 oil=0.000258
+2026-01-21 10:02:26,109 - INFO - oil_simulation - fishing_ground_oil t=0.230 oil=0.000295
+2026-01-21 10:02:31,042 - INFO - oil_simulation - fishing_ground_oil t=0.240 oil=0.000337
+2026-01-21 10:02:31,092 - INFO - oil_simulation - fishing_ground_oil t=0.250 oil=0.000383
+2026-01-21 10:02:35,913 - INFO - oil_simulation - fishing_ground_oil t=0.260 oil=0.000434
+2026-01-21 10:02:35,966 - INFO - oil_simulation - fishing_ground_oil t=0.270 oil=0.000490
+2026-01-21 10:02:41,472 - INFO - oil_simulation - fishing_ground_oil t=0.280 oil=0.000551
+2026-01-21 10:02:41,570 - INFO - oil_simulation - fishing_ground_oil t=0.290 oil=0.000618
+2026-01-21 10:02:46,603 - INFO - oil_simulation - fishing_ground_oil t=0.300 oil=0.000691
+2026-01-21 10:02:46,655 - INFO - oil_simulation - fishing_ground_oil t=0.310 oil=0.000770
+2026-01-21 10:02:51,495 - INFO - oil_simulation - fishing_ground_oil t=0.320 oil=0.000856
+2026-01-21 10:02:51,549 - INFO - oil_simulation - fishing_ground_oil t=0.330 oil=0.000947
+2026-01-21 10:02:56,340 - INFO - oil_simulation - fishing_ground_oil t=0.340 oil=0.001045
+2026-01-21 10:02:56,395 - INFO - oil_simulation - fishing_ground_oil t=0.350 oil=0.001149
+2026-01-21 10:03:01,265 - INFO - oil_simulation - fishing_ground_oil t=0.360 oil=0.001260
+2026-01-21 10:03:01,315 - INFO - oil_simulation - fishing_ground_oil t=0.370 oil=0.001377
+2026-01-21 10:03:06,363 - INFO - oil_simulation - fishing_ground_oil t=0.380 oil=0.001500
+2026-01-21 10:03:06,417 - INFO - oil_simulation - fishing_ground_oil t=0.390 oil=0.001629
+2026-01-21 10:03:11,255 - INFO - oil_simulation - fishing_ground_oil t=0.400 oil=0.001764
+2026-01-21 10:03:11,306 - INFO - oil_simulation - fishing_ground_oil t=0.410 oil=0.001904
+2026-01-21 10:03:16,090 - INFO - oil_simulation - fishing_ground_oil t=0.420 oil=0.002049
+2026-01-21 10:03:16,139 - INFO - oil_simulation - fishing_ground_oil t=0.430 oil=0.002198
+2026-01-21 10:03:20,911 - INFO - oil_simulation - fishing_ground_oil t=0.440 oil=0.002352
+2026-01-21 10:03:20,961 - INFO - oil_simulation - fishing_ground_oil t=0.450 oil=0.002509
+2026-01-21 10:03:25,816 - INFO - oil_simulation - fishing_ground_oil t=0.460 oil=0.002670
+2026-01-21 10:03:25,867 - INFO - oil_simulation - fishing_ground_oil t=0.470 oil=0.002832
+2026-01-21 10:03:30,674 - INFO - oil_simulation - fishing_ground_oil t=0.480 oil=0.002996
+2026-01-21 10:03:30,726 - INFO - oil_simulation - fishing_ground_oil t=0.490 oil=0.003162
+2026-01-21 10:03:36,041 - INFO - oil_simulation - fishing_ground_oil t=0.500 oil=0.003328
+2026-01-21 10:03:36,042 - INFO - oil_simulation - Simulation summary:
+2026-01-21 10:03:36,042 - INFO - oil_simulation -   t_end=0.500000
+2026-01-21 10:03:36,042 - INFO - oil_simulation -   final_fishing_ground_oil=3.327593227858e-03
+2026-01-21 10:03:36,042 - INFO - oil_simulation - Simulation summary (from main):
+2026-01-21 10:03:36,042 - INFO - oil_simulation -   final_fishing_ground_oil = 3.327593227858e-03
